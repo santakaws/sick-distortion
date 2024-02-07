@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Sick Distortion</title>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <div class="page">
+            <div class="og_image">
+                <label for="upload_img">Upload an image file:</label>
+                <input id="upload_img" type="file" accept="image/*" onchange="uploadImage(event)">
+                <button class="button-3" id="distort_button" onclick="distortImage()">DISTORT</button>
+            </div>
+            <div class="og_image">
+                <img class="center_fit" id="img" crossorigin="anonymous">
+                <canvas class="center_fit" id="img_canvas"></canvas>
+            </div>
+        </div>
+        
+        <script src="app.js"></script>
+    </body>
+</html>
