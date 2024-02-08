@@ -1,11 +1,13 @@
 let image = document.getElementById('img');
 let canvas = document.getElementById('img_canvas');
 let cv_cont;
-let button = document.getElementById('distort_button')
+let dist_button = document.getElementById('distort_button');
+let dload_button = document.getElementById('download_button');
 
 function uploadImage(event) {
     console.log('In uploadImage() function');
-    //button.disabled = false;
+    dload_button.disabled = true;
+    //dist_button.disabled = false;
     image.src = URL.createObjectURL(event.target.files[0]);
     
     image.onload = function () {
@@ -19,9 +21,18 @@ function uploadImage(event) {
     };
 };
 
+function downloadDistortedImage() {
+    console.log('In downloadDistortedImage() function');
+    var dataURL = canvas.toDataURL("image/*");
+    var z = document.createElement('z');
+    z.href = dataURL;
+    z.download = "distorted-image.jpeg"
+    z.click();
+};
+
 function distortImage() {
     console.log('In distortImage() function');
-    //button.disabled = true;
+    //dist_button.disabled = true;
     cv_cont.drawImage(image, 0 , 0, image.naturalWidth, image.naturalHeight);
     const image_data = cv_cont.getImageData(0, 0, image.naturalWidth, image.naturalHeight);
 
@@ -55,6 +66,8 @@ function distortImage() {
         bar(image_data);
     }
     cv_cont.putImageData(image_data, 0, 0);
+
+    dload_button.disabled = false;
 
     console.log("distortImage() complete");
 };
