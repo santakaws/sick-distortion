@@ -17,17 +17,19 @@ function uploadImage(event) {
         canvas.crossOrigin = 'anonymous';
         cv_cont = canvas.getContext('2d');
         cv_cont.drawImage(image, 0 , 0, image.naturalWidth, image.naturalHeight);
+        //canvas.toBlob(resolve, 'image/jpeg')
         console.log(image.naturalWidth + "x" + image.naturalHeight);
     };
 };
 
 function downloadDistortedImage() {
     console.log('In downloadDistortedImage() function');
-    var dataURL = canvas.toDataURL("image/*");
-    var z = document.createElement('z');
-    z.href = dataURL;
-    z.download = "distorted-image.jpeg"
-    z.click();
+    var dataURL = canvas.toDataURL("image/jpeg");
+    var link = document.createElement('a');
+    link.href = dataURL;
+    link.download = "distorted-image.jpg";
+    link.click();
+    console.log(link.href);
 };
 
 function distortImage() {
